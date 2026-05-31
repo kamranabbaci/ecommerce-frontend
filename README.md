@@ -1,59 +1,225 @@
-# EcommerceFrontend
+# 🛒 Ecommerce Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+A modern, responsive e-commerce web application built using Angular 21 and Bootstrap 5. The application provides a complete online shopping experience with product browsing, shopping cart management, secure checkout, customer order tracking, and an administrative dashboard for managing products, categories, and orders.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Features
 
-```bash
+### Customer Features
+
+* Responsive modern UI
+* Product catalog
+* Product detail page
+* Product search
+* Product filtering by category
+* Product pagination
+* Shopping cart management
+* Update item quantities
+* Remove items from cart
+* Checkout process
+* Customer registration
+* Customer login
+* JWT authentication
+* Order placement
+* Order history
+* Mobile-friendly design
+* Toast notifications
+
+### Admin Features
+
+* Secure admin login
+* Admin dashboard
+* Product management
+
+  * Add product
+  * Update product
+  * Delete product
+* Category management
+
+  * Add category
+  * Update category
+  * Delete category
+* Order management
+
+  * View all orders
+  * View order details
+  * Update order status
+* Dashboard statistics
+
+  * Total products
+  * Total categories
+  * Total orders
+  * Revenue overview
+
+---
+
+## 🏗️ Technology Stack
+
+### Frontend
+
+* Angular 21
+* TypeScript
+* Bootstrap 5
+* Bootstrap Icons
+* RxJS
+* Angular Router
+* Angular Forms
+
+### Authentication
+
+* JWT Token Authentication
+* Route Guards
+* Role-Based Authorization
+
+---
+
+## 📂 Project Structure
+
+src/
+
+├── app/
+
+│ ├── components/
+
+│ │ ├── home/
+
+│ │ ├── products/
+
+│ │ ├── product-detail/
+
+│ │ ├── cart/
+
+│ │ ├── checkout/
+
+│ │ ├── login/
+
+│ │ ├── register/
+
+│ │ ├── my-orders/
+
+│ │ ├── admin-dashboard/
+
+│ │ ├── admin-products/
+
+│ │ ├── admin-categories/
+
+│ │ └── admin-orders/
+
+│
+
+│ ├── services/
+
+│ │ ├── auth.service.ts
+
+│ │ ├── product.service.ts
+
+│ │ ├── category.service.ts
+
+│ │ ├── order.service.ts
+
+│ │ ├── cart.service.ts
+
+│ │ ├── toast.service.ts
+
+│ │ └── confirm.service.ts
+
+│
+
+│ ├── guards/
+
+│ │ ├── auth.guard.ts
+
+│ │ └── admin.guard.ts
+
+│
+
+│ ├── shared/
+
+│ │ ├── navbar/
+
+│ │ ├── toast/
+
+│ │ └── confirm-modal/
+
+│
+
+│ └── models/
+
+---
+
+## 🔐 Authentication Flow
+
+### Customer
+
+1. Register account
+2. Login
+3. JWT token stored locally
+4. Access customer features
+5. Place orders
+6. Track order history
+
+### Admin
+
+1. Login with admin account
+2. Access admin dashboard
+3. Manage products
+4. Manage categories
+5. Manage orders
+
+---
+
+## 📦 Installation
+
+### Install Dependencies
+
+npm install
+
+### Run Application
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Application will run on:
 
-## Code scaffolding
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## 🔧 Build Production Version
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build files will be generated in:
 
-## Running unit tests
+dist/
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 📱 Responsive Design
 
-## Running end-to-end tests
+The application is fully responsive and supports:
 
-For end-to-end (e2e) testing, run:
+* Mobile Phones
+* Tablets
+* Laptops
+* Desktop Screens
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🎨 UI Features
 
-## Additional Resources
+* Modern gradient theme
+* Responsive navigation
+* Toast notifications
+* Confirmation modals
+* Dashboard cards
+* Product cards
+* Modern checkout experience
+* Professional admin panel
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+
+## 👨‍💻 Author
+
+Kamran Abbasi
