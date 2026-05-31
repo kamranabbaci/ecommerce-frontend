@@ -1,0 +1,167 @@
+<section class="auth-page">
+    <div class="container">
+        <div class="row align-items-center justify-content-center auth-row">
+
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="auth-info">
+                    <span class="auth-badge">Join Our Store</span>
+
+                    <h1>Create your account and start shopping smarter</h1>
+
+                    <p>
+                        Register today to enjoy faster checkout, order tracking,
+                        and a personalized shopping experience.
+                    </p>
+
+                    <div class="auth-features">
+                        <div class="auth-feature">
+                            <i class="bi bi-person-check-fill"></i>
+                            <span>Create your customer profile</span>
+                        </div>
+
+                        <div class="auth-feature">
+                            <i class="bi bi-box-seam"></i>
+                            <span>Track your orders easily</span>
+                        </div>
+
+                        <div class="auth-feature">
+                            <i class="bi bi-bag-heart-fill"></i>
+                            <span>Enjoy a better shopping journey</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-5">
+                <div class="auth-card">
+
+                    <div class="text-center mb-4">
+                        <div class="auth-icon">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+
+                        <h2>Create Account</h2>
+                        <p>Fill in your details to register</p>
+                    </div>
+
+                    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-person"></i>
+
+                                <input type="text" class="form-control custom-input" [(ngModel)]="model.fullName"
+                                    name="fullName" #fullName="ngModel" placeholder="Enter your full name" required
+                                    minlength="3" maxlength="50" pattern="^[a-zA-Z ]+$">
+                            </div>
+
+                            @if (fullName.invalid && fullName.touched) {
+                            <small class="text-danger">
+                                @if (fullName.errors?.['required']) {
+                                Full name is required.
+                                }
+                                @if (fullName.errors?.['minlength']) {
+                                Name must be at least 3 characters.
+                                }
+                                @if (fullName.errors?.['pattern']) {
+                                Name should contain letters and spaces only.
+                                }
+                            </small>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-envelope"></i>
+
+                                <input type="email" class="form-control custom-input" [(ngModel)]="model.email"
+                                    name="email" #email="ngModel" placeholder="Enter your email" required email>
+                            </div>
+
+                            @if (email.invalid && email.touched) {
+                            <small class="text-danger">
+                                @if (email.errors?.['required']) {
+                                Email is required.
+                                }
+                                @if (email.errors?.['email']) {
+                                Enter a valid email address.
+                                }
+                            </small>
+                            }
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-lock"></i>
+
+                                <input type="password" class="form-control custom-input" [(ngModel)]="model.password"
+                                    name="password" #password="ngModel" placeholder="Create a password" required
+                                    minlength="6" pattern="^(?=.*[A-Za-z])(?=.*\d).{6,}$">
+                            </div>
+
+                            @if (password.invalid && password.touched) {
+                            <small class="text-danger">
+                                @if (password.errors?.['required']) {
+                                Password is required.
+                                }
+                                @if (password.errors?.['minlength']) {
+                                Password must be at least 6 characters.
+                                }
+                                @if (password.errors?.['pattern']) {
+                                Password must contain at least one letter and one number.
+                                }
+                            </small>
+                            }
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Confirm Password</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-shield-lock"></i>
+
+                                <input type="password" class="form-control custom-input"
+                                    [(ngModel)]="model.confirmPassword" name="confirmPassword"
+                                    #confirmPassword="ngModel" placeholder="Confirm your password" required>
+                            </div>
+
+                            @if (confirmPassword.invalid && confirmPassword.touched) {
+                            <small class="text-danger">
+                                Confirm password is required.
+                            </small>
+                            }
+
+                            @if (passwordsDoNotMatch() && confirmPassword.touched) {
+                            <small class="text-danger">
+                                Passwords do not match.
+                            </small>
+                            }
+                        </div>
+
+                        <button type="submit" class="btn btn-main w-100"
+                            [disabled]="registerForm.invalid || passwordsDoNotMatch() || isSubmitting">
+                            @if (isSubmitting) {
+                            Creating Account...
+                            } @else {
+                            Create Account
+                            }
+                        </button>
+                    </form>
+
+                    <div class="auth-footer-text">
+                        <span>Already have an account?</span>
+                        <a routerLink="/login">Login</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

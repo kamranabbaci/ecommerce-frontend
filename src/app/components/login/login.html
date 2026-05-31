@@ -1,0 +1,130 @@
+<section class="auth-page">
+
+    <div class="container">
+
+        <div class="row align-items-center justify-content-center auth-row">
+
+            <div class="col-lg-6 d-none d-lg-block">
+
+                <div class="auth-info">
+
+                    <span class="auth-badge">
+                        Welcome Back
+                    </span>
+
+                    <h1>
+                        Login to manage your shopping experience
+                    </h1>
+
+                    <p>
+                        Track orders, manage your cart, and enjoy a faster checkout experience.
+                    </p>
+
+                    <div class="auth-features">
+
+                        <div class="auth-feature">
+                            <i class="bi bi-bag-check-fill"></i>
+                            <span>Easy order tracking</span>
+                        </div>
+
+                        <div class="auth-feature">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Secure authentication</span>
+                        </div>
+
+                        <div class="auth-feature">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                            <span>Fast checkout process</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-8 col-lg-5">
+
+                <div class="auth-card">
+
+                    <div class="text-center mb-4">
+
+                        <div class="auth-icon">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+
+                        <h2>Sign In</h2>
+
+                        <p>
+                            Enter your credentials to continue
+                        </p>
+
+                    </div>
+
+                    <form (ngSubmit)="login()">
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-envelope"></i>
+
+                                <input type="email" class="form-control custom-input" [(ngModel)]="model.email"
+                                    name="email" placeholder="Enter your email" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-lock"></i>
+
+                                <input type="password" class="form-control custom-input" [(ngModel)]="model.password"
+                                    name="password" placeholder="Enter your password" required>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+
+                                <label class="form-check-label" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <a href="javascript:void(0)" class="forgot-link">
+                                Forgot password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="btn btn-main w-100">
+                            Login
+                        </button>
+
+                    </form>
+
+                    <div class="auth-footer-text">
+
+                        <span>Don't have an account?</span>
+
+                        <a routerLink="/register">
+                            Create Account
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,41 @@
+@if (toastService.visible) {
+
+<div class="custom-toast" [class.success]="toastService.type === 'success'"
+  [class.error]="toastService.type === 'danger'" [class.warning]="toastService.type === 'warning'"
+  [class.info]="toastService.type === 'info'">
+
+  <div class="toast-icon">
+
+    @if (toastService.type === 'success') {
+    <i class="bi bi-check-circle-fill"></i>
+    }
+
+    @if (toastService.type === 'danger') {
+    <i class="bi bi-x-circle-fill"></i>
+    }
+
+    @if (toastService.type === 'warning') {
+    <i class="bi bi-exclamation-triangle-fill"></i>
+    }
+
+    @if (toastService.type === 'info') {
+    <i class="bi bi-info-circle-fill"></i>
+    }
+
+  </div>
+
+  <div class="toast-message">
+    {{ toastService.message }}
+  </div>
+
+  <button class="toast-close" (click)="toastService.visible = false">
+
+    <i class="bi bi-x-lg"></i>
+
+  </button>
+
+  <div class="toast-progress"></div>
+
+</div>
+
+}

@@ -1,0 +1,153 @@
+<section class="checkout-hero">
+    <div class="container">
+        <div class="checkout-hero-content">
+            <span class="checkout-badge">
+                Secure Checkout
+            </span>
+
+            <h1>Checkout</h1>
+
+            <p>
+                Complete your order by providing delivery and contact details.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <div class="col-12 col-lg-7">
+
+            <div class="checkout-card">
+
+                <div class="card-title-area">
+                    <div class="title-icon">
+                        <i class="bi bi-person-lines-fill"></i>
+                    </div>
+
+                    <div>
+                        <h4>Delivery Information</h4>
+                        <p>Enter your details for order delivery</p>
+                    </div>
+                </div>
+
+                <form (ngSubmit)="placeOrder()">
+
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-person"></i>
+
+                            <input class="form-control custom-input" [(ngModel)]="customerName" name="customerName"
+                                placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email Address</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-envelope"></i>
+
+                            <input type="email" class="form-control custom-input" [(ngModel)]="customerEmail"
+                                name="customerEmail" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-telephone"></i>
+
+                            <input class="form-control custom-input" [(ngModel)]="customerPhone" name="customerPhone"
+                                placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Delivery Address</label>
+
+                        <textarea class="form-control custom-textarea" rows="4" [(ngModel)]="address" name="address"
+                            placeholder="Enter complete delivery address" required>
+            </textarea>
+                    </div>
+
+                    <div class="payment-box mb-4">
+                        <div class="payment-icon">
+                            <i class="bi bi-cash-coin"></i>
+                        </div>
+
+                        <div>
+                            <h6>Payment Method</h6>
+                            <p>Cash on Delivery</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-main w-100" type="submit">
+                        <i class="bi bi-bag-check me-1"></i>
+                        Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-5">
+
+            <div class="summary-card">
+
+                <div class="card-title-area">
+                    <div class="title-icon">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+
+                    <div>
+                        <h4>Order Summary</h4>
+                        <p>Review your cart before placing order</p>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong>Rs. {{ getTotal() }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <strong class="text-success">Free</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <strong>Rs. 0</strong>
+                </div>
+
+                <hr>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong>Rs. {{ getTotal() }}</strong>
+                </div>
+
+                <div class="secure-note">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Your order details are processed securely.</span>
+                </div>
+
+                <a routerLink="/cart" class="btn btn-outline-primary w-100 mt-3">
+                    Back to Cart
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

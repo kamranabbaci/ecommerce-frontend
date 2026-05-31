@@ -1,0 +1,139 @@
+<section class="product-hero">
+    <div class="container">
+        <div class="hero-content text-center">
+            <span class="hero-badge">
+                Premium Collection
+            </span>
+
+            <h1>Explore Our Products</h1>
+
+            <p>
+                Discover quality products, smart prices, and a smooth shopping experience.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    <div class="filter-card">
+        <div class="row g-3 align-items-center">
+
+            <div class="col-12 col-md-6">
+                <div class="input-icon-wrapper">
+                    <i class="bi bi-search"></i>
+
+                    <input type="text" class="form-control custom-input" placeholder="Search product..."
+                        [(ngModel)]="searchText" (input)="searchProducts()">
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <select class="form-select custom-input" [(ngModel)]="selectedCategoryId" (change)="changeCategory()">
+
+                    <option [value]="0">All Categories</option>
+
+                    @for (category of categories; track category.id) {
+                    <option [value]="category.id">
+                        {{ category.name }}
+                    </option>
+                    }
+
+                </select>
+            </div>
+
+            <div class="col-12 col-md-2 text-md-end">
+                <span class="product-count">
+                    {{ totalCount }} items
+                </span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+
+        @for (product of products; track product.id) {
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex">
+
+            <div class="product-card w-100">
+
+                <div class="image-wrapper">
+                    <img [src]="product.imageUrl" [alt]="product.name">
+
+                    <span class="stock-badge">
+                        Stock: {{ product.stock }}
+                    </span>
+                </div>
+
+                <div class="product-body">
+
+                    <h5>{{ product.name }}</h5>
+
+                    <p>{{ product.description }}</p>
+
+                    <div class="price-row">
+                        <span class="price">
+                            Rs. {{ product.price }}
+                        </span>
+                    </div>
+
+                    <div class="product-actions">
+                        <a [routerLink]="['/products', product.id]" class="btn btn-outline-primary w-100">
+                            View Details
+                        </a>
+
+                        <button class="btn btn-main w-100" (click)="addToCart(product)">
+                            <i class="bi bi-cart-plus me-1"></i>
+                            Add to Cart
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        }
+
+        @if (products.length === 0) {
+        <div class="col-12">
+            <div class="empty-state">
+                <i class="bi bi-search"></i>
+                <h5>No products found</h5>
+                <p>Try another category or search keyword.</p>
+            </div>
+        </div>
+        }
+
+    </div>
+
+    @if (totalPages > 1) {
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center flex-wrap">
+
+            <li class="page-item" [class.disabled]="pageNumber === 1">
+                <button class="page-link" (click)="changePage(pageNumber - 1)">
+                    Previous
+                </button>
+            </li>
+
+            @for (page of getPages(); track page) {
+            <li class="page-item" [class.active]="page === pageNumber">
+                <button class="page-link" (click)="changePage(page)">
+                    {{ page }}
+                </button>
+            </li>
+            }
+
+            <li class="page-item" [class.disabled]="pageNumber === totalPages">
+                <button class="page-link" (click)="changePage(pageNumber + 1)">
+                    Next
+                </button>
+            </li>
+
+        </ul>
+    </nav>
+    }
+
+</div>

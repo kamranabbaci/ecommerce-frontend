@@ -1,0 +1,108 @@
+<section class="orders-hero">
+    <div class="container">
+        <h1>My Orders</h1>
+        <p>Track your purchases and order status</p>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    @if (selectedOrder) {
+    <div class="order-card mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h4 class="fw-bold mb-1">Order #{{ selectedOrder.id }}</h4>
+                <p class="text-muted mb-0">
+                    {{ selectedOrder.orderDate | date:'medium' }}
+                </p>
+            </div>
+
+            <button class="btn btn-outline-secondary btn-sm" (click)="closeDetails()">
+                Close
+            </button>
+        </div>
+
+        <div class="summary-box mb-4">
+            <p class="mb-1"><strong>Status:</strong>
+                <span class="badge status-badge">{{ selectedOrder.orderStatus }}</span>
+            </p>
+            <p class="mb-1"><strong>Total Items:</strong> {{ getOrderItemsCount(selectedOrder) }}</p>
+            <p class="mb-0"><strong>Total Amount:</strong> Rs. {{ selectedOrder.totalAmount }}</p>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th class="text-end">Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (item of selectedOrder.orderItems; track item.id) {
+                    <tr>
+                        <td><strong>{{ item.productName }}</strong></td>
+                        <td>Rs. {{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td class="text-end">Rs. {{ item.price * item.quantity }}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+
+    <div class="order-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="fw-bold mb-0">Order History</h4>
+            <span class="badge bg-primary">{{ orders.length }} Orders</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (order of orders; track order.id) {
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.orderDate | date:'short' }}</td>
+                        <td>{{ getOrderItemsCount(order) }}</td>
+                        <td><strong>Rs. {{ order.totalAmount }}</strong></td>
+                        <td>
+                            <span class="badge status-badge">{{ order.orderStatus }}</span>
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary" (click)="viewOrder(order)">
+                                View
+                            </button>
+                        </td>
+                    </tr>
+                    }
+
+                    @if (orders.length === 0) {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">
+                            You have not placed any orders yet.
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

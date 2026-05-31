@@ -1,0 +1,121 @@
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand" routerLink="/">
+            <i class="bi bi-bag-check-fill me-2"></i>
+            <span>Ecommerce</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/">
+                        Home
+                    </a>
+                </li>
+
+                <!-- Customer/Guest -->
+                @if (!isAdmin) {
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/products">
+                        Products
+                    </a>
+                </li>
+
+                @if (isLoggedIn) {
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/my-orders">
+                        My Orders
+                    </a>
+                </li>
+                }
+
+                <li class="nav-item">
+                    <a class="nav-link cart-link" routerLink="/cart">
+                        <i class="bi bi-cart3"></i>
+
+                        Cart
+
+                        <span class="cart-badge">
+                            {{ cartCount }}
+                        </span>
+                    </a>
+                </li>
+
+                }
+
+                <!-- Admin -->
+                @if (isAdmin) {
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin/dashboard">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin/products">
+                        Products
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin/categories">
+                        Categories
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/admin/orders">
+                        Orders
+                    </a>
+                </li>
+
+                }
+
+                <!-- Authentication -->
+                @if (!isLoggedIn) {
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">
+                        Login
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-main ms-lg-2" routerLink="/register">
+                        Register
+                    </a>
+                </li>
+
+                }
+
+                @if (isLoggedIn) {
+
+                <li class="nav-item">
+                    <span class="user-greeting">
+                        Hi, {{ fullName }}
+                    </span>
+                </li>
+
+                <li class="nav-item">
+                    <button class="btn btn-outline-light btn-sm ms-lg-2" (click)="logout()">
+                        Logout
+                    </button>
+                </li>
+
+                }
+
+            </ul>
+
+        </div>
+    </div>
+</nav>

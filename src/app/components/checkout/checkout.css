@@ -1,0 +1,250 @@
+.checkout-hero {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: white;
+  padding: 40px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkout-hero::before {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  top: -90px;
+  left: -80px;
+}
+
+.checkout-hero::after {
+  content: '';
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  bottom: -150px;
+  right: -120px;
+}
+
+.checkout-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.checkout-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.checkout-hero h1 {
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.checkout-hero p {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+}
+
+.checkout-card,
+.summary-card {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+}
+
+.summary-card {
+  position: sticky;
+  top: 100px;
+}
+
+.card-title-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.title-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.card-title-area h4 {
+  font-weight: 900;
+  margin-bottom: 3px;
+  color: #111827;
+}
+
+.card-title-area p {
+  color: #6b7280;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.form-label {
+  font-weight: 700;
+  color: #111827;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+
+.custom-input {
+  min-height: 50px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  padding-left: 42px;
+  font-weight: 500;
+}
+
+.custom-textarea {
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  font-weight: 500;
+  resize: none;
+}
+
+.custom-input:focus,
+.custom-textarea:focus {
+  box-shadow: none;
+  border-color: #0d6efd;
+}
+
+.payment-box {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.payment-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: #ecfdf5;
+  color: #198754;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.payment-box h6 {
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+
+.payment-box p {
+  color: #6b7280;
+  margin-bottom: 0;
+}
+
+.btn-main {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  border: none;
+  color: white;
+  font-weight: 800;
+  border-radius: 14px;
+  padding: 13px 20px;
+}
+
+.btn-main:hover {
+  color: white;
+  opacity: 0.92;
+}
+
+.summary-row,
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.summary-row span {
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.summary-row strong {
+  color: #111827;
+}
+
+.summary-total {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.summary-total strong {
+  color: #0d6efd;
+}
+
+.secure-note {
+  background: #eef4ff;
+  color: #0d6efd;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.btn-outline-primary {
+  border-radius: 14px;
+  font-weight: 800;
+  padding: 12px 20px;
+}
+
+@media (max-width: 991px) {
+  .summary-card {
+    position: static;
+  }
+}
+
+@media (max-width: 576px) {
+  .checkout-hero {
+    padding: 35px 0 42px;
+  }
+
+  .checkout-card,
+  .summary-card {
+    padding: 20px;
+  }
+
+  .card-title-area {
+    align-items: flex-start;
+  }
+}

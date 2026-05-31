@@ -1,0 +1,234 @@
+<section class="admin-hero">
+    <div class="container">
+        <div class="admin-hero-content">
+            <span class="admin-badge">
+                Admin Panel
+            </span>
+
+            <h1>Product Management</h1>
+
+            <p>
+                Add, update, and manage all products in your ecommerce store.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <div class="col-12 col-lg-4">
+
+            <div class="admin-card form-card">
+
+                <div class="card-title-area">
+                    <div class="title-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+
+                    <div>
+                        <h4>
+                            {{ isEditMode ? 'Update Product' : 'Add Product' }}
+                        </h4>
+                        <p>
+                            {{ isEditMode ? 'Modify product details' : 'Create a new product listing' }}
+                        </p>
+                    </div>
+                </div>
+
+                <form (ngSubmit)="saveProduct()">
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-tag"></i>
+
+                            <input type="text" class="form-control custom-input" [(ngModel)]="product.name" name="name"
+                                placeholder="Enter product name" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+
+                        <textarea class="form-control custom-textarea" rows="3" [(ngModel)]="product.description"
+                            name="description" placeholder="Enter product description" required>
+            </textarea>
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Price</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-cash"></i>
+
+                                <input type="number" class="form-control custom-input" [(ngModel)]="product.price"
+                                    name="price" placeholder="Price" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Stock</label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-boxes"></i>
+
+                                <input type="number" class="form-control custom-input" [(ngModel)]="product.stock"
+                                    name="stock" placeholder="Stock" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Image URL</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-image"></i>
+
+                            <input type="text" class="form-control custom-input" [(ngModel)]="product.imageUrl"
+                                name="imageUrl" placeholder="Paste product image URL" required>
+                        </div>
+                    </div>
+
+                    @if (product.imageUrl) {
+                    <div class="image-preview">
+                        <img [src]="product.imageUrl" alt="Product preview">
+                    </div>
+                    }
+
+                    <div class="mb-4">
+                        <label class="form-label">Category</label>
+
+                        <select class="form-select custom-input" [(ngModel)]="product.categoryId" name="categoryId"
+                            required>
+
+                            <option [value]="0">Select Category</option>
+
+                            @for (category of categories; track category.id) {
+                            <option [value]="category.id">
+                                {{ category.name }}
+                            </option>
+                            }
+
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-main w-100">
+                        <i class="bi" [class.bi-pencil-square]="isEditMode" [class.bi-plus-circle]="!isEditMode"></i>
+                        {{ isEditMode ? 'Update Product' : 'Add Product' }}
+                    </button>
+
+                    @if (isEditMode) {
+                    <button type="button" class="btn btn-outline-secondary w-100 mt-2" (click)="resetForm()">
+                        Cancel Edit
+                    </button>
+                    }
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-8">
+
+            <div class="admin-card">
+
+                <div class="table-toolbar">
+                    <div>
+                        <h4>Product List</h4>
+                        <p>Manage all available products</p>
+                    </div>
+
+                    <span class="count-badge">
+                        {{ products.length }} Products
+                    </span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table align-middle admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th class="text-end">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @for (item of products; track item.id) {
+                            <tr>
+
+                                <td>
+                                    <div class="product-cell">
+                                        <img [src]="item.imageUrl" [alt]="item.name">
+
+                                        <div>
+                                            <strong>{{ item.name }}</strong>
+                                            <p>{{ item.description }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <span class="category-pill">
+                                        {{ getCategoryName(item.categoryId) }}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <strong class="price-text">
+                                        Rs. {{ item.price }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    <span class="stock-pill" [class.low-stock]="item.stock <= 5">
+                                        {{ item.stock }} in stock
+                                    </span>
+                                </td>
+
+                                <td class="text-end">
+
+                                    <button class="btn btn-sm btn-edit me-2" (click)="editProduct(item)">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+
+                                    <button class="btn btn-sm btn-delete" (click)="deleteProduct(item.id)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+
+                                </td>
+
+                            </tr>
+                            }
+
+                            @if (products.length === 0) {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted py-5">
+                                    No products available.
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

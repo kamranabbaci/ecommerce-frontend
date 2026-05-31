@@ -1,0 +1,142 @@
+<section class="admin-hero">
+    <div class="container">
+        <div class="admin-hero-content">
+            <span class="admin-badge">
+                Admin Panel
+            </span>
+
+            <h1>Category Management</h1>
+
+            <p>
+                Create, update, and organize product categories for your store.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <div class="col-12 col-lg-4">
+
+            <div class="admin-card form-card">
+
+                <div class="card-title-area">
+                    <div class="title-icon">
+                        <i class="bi bi-grid"></i>
+                    </div>
+
+                    <div>
+                        <h4>
+                            {{ isEditMode ? 'Update Category' : 'Add Category' }}
+                        </h4>
+
+                        <p>
+                            {{ isEditMode ? 'Modify category details' : 'Create a new product category' }}
+                        </p>
+                    </div>
+                </div>
+
+                <form (ngSubmit)="saveCategory()">
+
+                    <div class="mb-4">
+                        <label class="form-label">Category Name</label>
+
+                        <div class="input-wrapper">
+                            <i class="bi bi-folder"></i>
+
+                            <input type="text" class="form-control custom-input" [(ngModel)]="category.name" name="name"
+                                placeholder="Enter category name" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-main w-100">
+                        <i class="bi" [class.bi-pencil-square]="isEditMode" [class.bi-plus-circle]="!isEditMode">
+                        </i>
+                        {{ isEditMode ? 'Update Category' : 'Add Category' }}
+                    </button>
+
+                    @if (isEditMode) {
+                    <button type="button" class="btn btn-outline-secondary w-100 mt-2" (click)="resetForm()">
+                        Cancel Edit
+                    </button>
+                    }
+
+                </form>
+
+                <div class="info-note mt-4">
+                    <i class="bi bi-info-circle"></i>
+
+                    <span>
+                        Categories help customers browse products easily.
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-8">
+
+            <div class="admin-card">
+
+                <div class="table-toolbar">
+                    <div>
+                        <h4>Category List</h4>
+                        <p>Manage all available product categories</p>
+                    </div>
+
+                    <span class="count-badge">
+                        {{ categories.length }} Categories
+                    </span>
+                </div>
+
+                <div class="category-grid">
+
+                    @for (item of categories; track item.id) {
+
+                    <div class="category-item">
+
+                        <div class="category-icon">
+                            <i class="bi bi-folder-fill"></i>
+                        </div>
+
+                        <div class="category-content">
+                            <h5>{{ item.name }}</h5>
+                            <p>Category ID: #{{ item.id }}</p>
+                        </div>
+
+                        <div class="category-actions">
+
+                            <button class="btn btn-sm btn-edit" (click)="editCategory(item)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+
+                            <button class="btn btn-sm btn-delete" (click)="deleteCategory(item.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    }
+
+                    @if (categories.length === 0) {
+                    <div class="empty-state">
+                        <i class="bi bi-folder-x"></i>
+                        <h5>No categories available</h5>
+                        <p>Create your first category to organize products.</p>
+                    </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

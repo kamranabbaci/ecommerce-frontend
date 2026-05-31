@@ -1,0 +1,249 @@
+<section class="admin-hero">
+    <div class="container">
+        <div class="admin-hero-content">
+            <span class="admin-badge">
+                Admin Panel
+            </span>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Monitor store performance, revenue, products, and recent orders.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon products">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+
+                <div>
+                    <p>Total Products</p>
+                    <h3>{{ totalProducts }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon categories">
+                    <i class="bi bi-grid"></i>
+                </div>
+
+                <div>
+                    <p>Total Categories</p>
+                    <h3>{{ totalCategories }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon orders">
+                    <i class="bi bi-receipt"></i>
+                </div>
+
+                <div>
+                    <p>Total Orders</p>
+                    <h3>{{ totalOrders }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="stat-card">
+                <div class="stat-icon revenue">
+                    <i class="bi bi-cash-stack"></i>
+                </div>
+
+                <div>
+                    <p>Total Revenue</p>
+                    <h3>Rs. {{ totalRevenue }}</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-12 col-lg-8">
+
+            <div class="admin-card">
+
+                <div class="section-header">
+                    <div>
+                        <h4>Recent Orders</h4>
+                        <p>Latest customer orders</p>
+                    </div>
+
+                    <a routerLink="/admin/orders" class="btn btn-outline-primary btn-sm">
+                        View All
+                    </a>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table align-middle dashboard-table">
+
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @for (order of recentOrders; track order.id) {
+                            <tr>
+                                <td>
+                                    <strong>#{{ order.id }}</strong>
+                                </td>
+
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar">
+                                            {{ order.customerName.charAt(0).toUpperCase() }}
+                                        </div>
+
+                                        <div>
+                                            <strong>{{ order.customerName }}</strong>
+                                            <p>{{ order.customerEmail }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {{ order.orderDate | date:'short' }}
+                                </td>
+
+                                <td>
+                                    {{ getOrderItemsCount(order) }}
+                                </td>
+
+                                <td>
+                                    <strong class="price-text">
+                                        Rs. {{ order.totalAmount }}
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    <span class="status-pill" [class.status-pending]="order.orderStatus === 'Pending'"
+                                        [class.status-confirmed]="order.orderStatus === 'Confirmed'"
+                                        [class.status-shipped]="order.orderStatus === 'Shipped'"
+                                        [class.status-delivered]="order.orderStatus === 'Delivered'"
+                                        [class.status-cancelled]="order.orderStatus === 'Cancelled'">
+                                        {{ order.orderStatus }}
+                                    </span>
+                                </td>
+                            </tr>
+                            }
+
+                            @if (recentOrders.length === 0) {
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">
+                                    No recent orders available.
+                                </td>
+                            </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-4">
+
+            <div class="admin-card h-100">
+
+                <div class="section-header">
+                    <div>
+                        <h4>Order Status</h4>
+                        <p>Current order distribution</p>
+                    </div>
+                </div>
+
+                <div class="status-list">
+
+                    <div class="status-row">
+                        <span class="status-dot pending"></span>
+                        <span>Pending</span>
+                        <strong>{{ pendingOrders }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-dot confirmed"></span>
+                        <span>Confirmed</span>
+                        <strong>{{ confirmedOrders }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-dot shipped"></span>
+                        <span>Shipped</span>
+                        <strong>{{ shippedOrders }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-dot delivered"></span>
+                        <span>Delivered</span>
+                        <strong>{{ deliveredOrders }}</strong>
+                    </div>
+
+                    <div class="status-row">
+                        <span class="status-dot cancelled"></span>
+                        <span>Cancelled</span>
+                        <strong>{{ cancelledOrders }}</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-4">
+            <a routerLink="/admin/products" class="quick-card">
+                <i class="bi bi-box-seam"></i>
+                <h5>Manage Products</h5>
+                <p>Add, edit, and delete products</p>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <a routerLink="/admin/categories" class="quick-card">
+                <i class="bi bi-grid"></i>
+                <h5>Manage Categories</h5>
+                <p>Organize store categories</p>
+            </a>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <a routerLink="/admin/orders" class="quick-card">
+                <i class="bi bi-receipt"></i>
+                <h5>Manage Orders</h5>
+                <p>View and update order status</p>
+            </a>
+        </div>
+
+    </div>
+
+</div>

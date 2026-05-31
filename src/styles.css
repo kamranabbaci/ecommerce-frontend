@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #6610f2;
+  --dark-color: #111827;
+  --light-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --text-muted: #6b7280;
+  --border-color: #e5e7eb;
+}
+
+body {
+  background-color: var(--light-bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--dark-color);
+}
+
+.section-title {
+  font-weight: 800;
+  color: var(--dark-color);
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+}
+
+.btn-main {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-main:hover {
+  color: white;
+  opacity: 0.9;
+}

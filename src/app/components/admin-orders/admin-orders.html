@@ -1,0 +1,255 @@
+<section class="admin-hero">
+    <div class="container">
+        <div class="admin-hero-content">
+            <span class="admin-badge">
+                Admin Panel
+            </span>
+
+            <h1>Order Management</h1>
+
+            <p>
+                View customer orders, inspect purchased items, and update delivery status.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    @if (selectedOrder) {
+    <div class="admin-card details-card mb-4">
+
+        <div class="details-header">
+            <div>
+                <span class="order-label">
+                    Selected Order
+                </span>
+
+                <h4>
+                    Order #{{ selectedOrder.id }}
+                </h4>
+
+                <p>
+                    {{ selectedOrder.orderDate | date:'medium' }}
+                </p>
+            </div>
+
+            <button class="btn btn-outline-secondary btn-sm" (click)="closeDetails()">
+                Close
+            </button>
+        </div>
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-12 col-md-6">
+                <div class="info-box">
+                    <div class="info-title">
+                        <i class="bi bi-person-circle"></i>
+                        <h6>Customer Information</h6>
+                    </div>
+
+                    <p><strong>Name:</strong> {{ selectedOrder.customerName }}</p>
+                    <p><strong>Email:</strong> {{ selectedOrder.customerEmail }}</p>
+                    <p><strong>Phone:</strong> {{ selectedOrder.customerPhone }}</p>
+                    <p class="mb-0">
+                        <strong>Address:</strong> {{ selectedOrder.address }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="info-box">
+                    <div class="info-title">
+                        <i class="bi bi-receipt"></i>
+                        <h6>Order Summary</h6>
+                    </div>
+
+                    <p>
+                        <strong>Total Items:</strong>
+                        {{ getOrderItemsCount(selectedOrder) }}
+                    </p>
+
+                    <p>
+                        <strong>Total Amount:</strong>
+                        Rs. {{ selectedOrder.totalAmount }}
+                    </p>
+
+                    <p class="mb-0">
+                        <strong>Status:</strong>
+                        <span class="status-pill" [class.status-pending]="selectedOrder.orderStatus === 'Pending'"
+                            [class.status-confirmed]="selectedOrder.orderStatus === 'Confirmed'"
+                            [class.status-shipped]="selectedOrder.orderStatus === 'Shipped'"
+                            [class.status-delivered]="selectedOrder.orderStatus === 'Delivered'"
+                            [class.status-cancelled]="selectedOrder.orderStatus === 'Cancelled'">
+                            {{ selectedOrder.orderStatus }}
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle admin-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Product ID</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th class="text-end">Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (item of selectedOrder.orderItems; track item.id) {
+                    <tr>
+                        <td>
+                            <strong>{{ item.productName }}</strong>
+                        </td>
+
+                        <td>
+                            #{{ item.productId }}
+                        </td>
+
+                        <td>
+                            Rs. {{ item.price }}
+                        </td>
+
+                        <td>
+                            {{ item.quantity }}
+                        </td>
+
+                        <td class="text-end">
+                            <strong>
+                                Rs. {{ item.price * item.quantity }}
+                            </strong>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    }
+
+    <div class="admin-card">
+
+        <div class="table-toolbar">
+            <div>
+                <h4>All Orders</h4>
+                <p>Manage all customer orders from one place</p>
+            </div>
+
+            <span class="count-badge">
+                {{ orders.length }} Orders
+            </span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle admin-table">
+
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th class="text-end">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @for (order of orders; track order.id) {
+                    <tr>
+
+                        <td>
+                            <strong>#{{ order.id }}</strong>
+                        </td>
+
+                        <td>
+                            <div class="customer-cell">
+                                <div class="customer-avatar">
+                                    {{ order.customerName.charAt(0).toUpperCase() }}
+                                </div>
+
+                                <div>
+                                    <strong>{{ order.customerName }}</strong>
+                                    <p>{{ order.customerEmail }}</p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            {{ order.customerPhone }}
+                        </td>
+
+                        <td>
+                            {{ order.orderDate | date:'short' }}
+                        </td>
+
+                        <td>
+                            <span class="items-pill">
+                                {{ getOrderItemsCount(order) }} items
+                            </span>
+                        </td>
+
+                        <td>
+                            <strong class="price-text">
+                                Rs. {{ order.totalAmount }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            <select class="form-select status-select" [(ngModel)]="order.orderStatus"
+                                [class.status-pending]="order.orderStatus === 'Pending'"
+                                [class.status-confirmed]="order.orderStatus === 'Confirmed'"
+                                [class.status-shipped]="order.orderStatus === 'Shipped'"
+                                [class.status-delivered]="order.orderStatus === 'Delivered'"
+                                [class.status-cancelled]="order.orderStatus === 'Cancelled'">
+
+                                @for (status of statuses; track status) {
+                                <option [value]="status">
+                                    {{ status }}
+                                </option>
+                                }
+
+                            </select>
+                        </td>
+
+                        <td class="text-end">
+
+                            <button class="btn btn-sm btn-update me-2" (click)="updateStatus(order)">
+                                <i class="bi bi-check2-circle"></i>
+                            </button>
+
+                            <button class="btn btn-sm btn-view" (click)="viewOrder(order)">
+                                <i class="bi bi-eye"></i>
+                            </button>
+
+                        </td>
+
+                    </tr>
+                    }
+
+                    @if (orders.length === 0) {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-5">
+                            No orders available.
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>

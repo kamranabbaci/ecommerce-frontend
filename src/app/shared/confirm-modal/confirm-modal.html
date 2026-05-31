@@ -1,0 +1,27 @@
+@if (confirmService.visible) {
+<div class="modal-backdrop-custom"></div>
+
+<div class="confirm-modal-wrapper">
+    <div class="confirm-modal">
+
+        <div class="confirm-icon">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+
+        <h4>{{ confirmService.title }}</h4>
+
+        <p>{{ confirmService.message }}</p>
+
+        <div class="confirm-actions">
+            <button type="button" class="btn btn-outline-secondary" (click)="confirmService.cancel()">
+                {{ confirmService.cancelText }}
+            </button>
+
+            <button type="button" class="btn btn-danger" (click)="confirmService.accept()">
+                {{ confirmService.confirmText }}
+            </button>
+        </div>
+
+    </div>
+</div>
+}

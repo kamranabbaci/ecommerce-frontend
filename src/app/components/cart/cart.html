@@ -1,0 +1,142 @@
+<section class="cart-hero">
+    <div class="container">
+        <div class="cart-hero-content text-center">
+            <span class="cart-badge-title">
+                Shopping Bag
+            </span>
+
+            <h1>Your Cart</h1>
+
+            <p>
+                Review your selected products before checkout.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    @if (items.length > 0) {
+
+    <div class="row g-4">
+
+        <div class="col-12 col-lg-8">
+
+            <div class="cart-card">
+
+                <div class="cart-header">
+                    <h4>Cart Items</h4>
+                    <span>{{ items.length }} Products</span>
+                </div>
+
+                @for (item of items; track item.product.id) {
+
+                <div class="cart-item">
+
+                    <div class="cart-img-wrapper">
+                        <img [src]="item.product.imageUrl" [alt]="item.product.name">
+                    </div>
+
+                    <div class="cart-info">
+                        <h5>{{ item.product.name }}</h5>
+                        <p>{{ item.product.description }}</p>
+
+                        <span class="cart-price">
+                            Rs. {{ item.product.price }}
+                        </span>
+                    </div>
+
+                    <div class="quantity-box">
+                        <button class="qty-btn" (click)="decrease(item.product.id)">
+                            -
+                        </button>
+
+                        <span>{{ item.quantity }}</span>
+
+                        <button class="qty-btn" (click)="increase(item.product.id)">
+                            +
+                        </button>
+                    </div>
+
+                    <div class="subtotal-box">
+                        <strong>
+                            Rs. {{ item.product.price * item.quantity }}
+                        </strong>
+
+                        <button class="remove-btn" (click)="remove(item.product.id)">
+                            <i class="bi bi-trash"></i>
+                            Remove
+                        </button>
+                    </div>
+
+                </div>
+
+                }
+
+            </div>
+
+        </div>
+
+        <div class="col-12 col-lg-4">
+
+            <div class="summary-card">
+
+                <h4>Order Summary</h4>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong>Rs. {{ getTotal() }}</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery</span>
+                    <strong>Free</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Discount</span>
+                    <strong>Rs. 0</strong>
+                </div>
+
+                <hr>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong>Rs. {{ getTotal() }}</strong>
+                </div>
+
+                <a routerLink="/checkout" class="btn btn-main w-100 mt-4">
+                    Proceed to Checkout
+                </a>
+
+                <a routerLink="/products" class="btn btn-outline-primary w-100 mt-2">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    } @else {
+
+    <div class="empty-cart">
+
+        <i class="bi bi-cart-x"></i>
+
+        <h3>Your cart is empty</h3>
+
+        <p>
+            Looks like you have not added anything to your cart yet.
+        </p>
+
+        <a routerLink="/products" class="btn btn-main">
+            Start Shopping
+        </a>
+
+    </div>
+
+    }
+
+</div>

@@ -1,0 +1,86 @@
+.custom-navbar {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+
+  padding: 14px 0;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white !important;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand i {
+  font-size: 1.4rem;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+.nav-link.active {
+  color: white !important;
+}
+
+.cart-link {
+  position: relative;
+}
+
+.cart-badge {
+  background: white;
+  color: #0d6efd;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.user-greeting {
+  color: white;
+  font-weight: 600;
+  padding: 8px 12px;
+  display: inline-block;
+}
+
+.btn-main {
+  background: white;
+  color: #0d6efd;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 8px 18px;
+}
+
+.btn-main:hover {
+  background: #f8f9fa;
+  color: #0d6efd;
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    padding-top: 15px;
+  }
+
+  .nav-item {
+    margin-bottom: 10px;
+  }
+
+  .user-greeting {
+    padding-left: 0;
+  }
+}

@@ -1,0 +1,128 @@
+<section class="detail-hero">
+    <div class="container">
+        <div class="detail-hero-content">
+            <span class="detail-badge">
+                Product Details
+            </span>
+
+            <h1>View Product</h1>
+
+            <p>
+                Check product information, price, stock, and add it to your cart.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+
+    @if (product) {
+
+    <div class="product-detail-card">
+
+        <div class="row g-4 align-items-center">
+
+            <div class="col-12 col-lg-6">
+
+                <div class="detail-image-wrapper">
+                    <img [src]="product.imageUrl" [alt]="product.name">
+
+                    <span class="stock-badge">
+                        {{ product.stock > 0 ? 'In Stock' : 'Out of Stock' }}
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-lg-6">
+
+                <div class="detail-content">
+
+                    <span class="product-id">
+                        Product ID: #{{ product.id }}
+                    </span>
+
+                    <h2>
+                        {{ product.name }}
+                    </h2>
+
+                    <p class="description">
+                        {{ product.description }}
+                    </p>
+
+                    <div class="price-box">
+                        <span>Price</span>
+                        <h3>Rs. {{ product.price }}</h3>
+                    </div>
+
+                    <div class="info-grid">
+
+                        <div class="info-item">
+                            <i class="bi bi-box-seam"></i>
+
+                            <div>
+                                <span>Available Stock</span>
+                                <strong>{{ product.stock }}</strong>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="bi bi-truck"></i>
+
+                            <div>
+                                <span>Delivery</span>
+                                <strong>Fast Delivery</strong>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="bi bi-shield-check"></i>
+
+                            <div>
+                                <span>Security</span>
+                                <strong>Secure Checkout</strong>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="bi bi-arrow-repeat"></i>
+
+                            <div>
+                                <span>Return</span>
+                                <strong>Easy Return</strong>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="action-buttons">
+
+                        <button class="btn btn-main btn-lg" (click)="addToCart()" [disabled]="product.stock <= 0">
+                            <i class="bi bi-cart-plus me-1"></i>
+                            Add to Cart
+                        </button>
+
+                        <a routerLink="/products" class="btn btn-outline-primary btn-lg">
+                            Back to Products
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    } @else {
+
+    <div class="loading-state">
+        <div class="spinner-border text-primary"></div>
+        <p>Loading product details...</p>
+    </div>
+
+    }
+
+</div>
